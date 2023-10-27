@@ -14,13 +14,15 @@ def generate_names(firstnames_filename, lastnames_filename, names_filename):
         reader = csv.reader(f)
         lastnames = next(reader)[:max_names]
 
+    random.shuffle(firstnames)
+    random.shuffle(lastnames)
+
     names = [f'{firstname} {lastname}' for firstname,
              lastname in zip(firstnames, lastnames)]
 
     with open(names_filename, 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(names)
-
 
 def generate_random_graph(names_filename):
     with open(names_filename, 'r') as f:
